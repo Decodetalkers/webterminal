@@ -43,6 +43,7 @@ void an_webview::connect_to_internet(){
 }
 void an_webview::close(){
     delete this;
+
 }
 /*
  * Make the solt
@@ -51,9 +52,9 @@ void an_webview::give_url(){
     emit get_the_url(url->text());
     //connect to the solt
 }
-QString an_webview::local_url(){
-    return url->text();
-}
+//QString an_webview::local_url(){
+//    return url->text();
+//}
 //When the url is changed, the text also change
 void an_webview::newurl(QUrl URL){
     //qDebug()<<"test";
@@ -65,4 +66,6 @@ void an_webview::newurl(QUrl URL){
 QString an_webview::name() const{
     return "an_webview*";
 }
-
+an_webview::~an_webview(){
+    emit check();
+}

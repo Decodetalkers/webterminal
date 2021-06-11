@@ -6,21 +6,22 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLineEdit>
+#include <QDir>
 #include "qwidget.h"
 #include <qtermwidget5/qtermwidget.h>
 class console : public Item{
     Q_OBJECT
 public:
-    Q_INVOKABLE console(QWidget *parent = nullptr,QString Url="/");
+    Q_INVOKABLE console(QWidget *parent = nullptr,QString Url=QDir::currentPath());
     static int typeId;
-    QString local_url();
+    //QString local_url();
     QString name() const;
+    ~console();
 signals:
     QString get_the_url(QString);
-
+    void check();
 public slots:
     void give_url();
-
 
 private:
     QPushButton *outside;

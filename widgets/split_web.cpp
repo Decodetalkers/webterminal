@@ -25,13 +25,21 @@ SplitWeb::SplitWeb(QWidget *parent,Item *item):
     //        a,SLOT(give_url()));
     //because give_url call the get_the_url,so connect get_the_url to split.
     connect(item,SIGNAL(get_the_url(QString)),
-            this,SLOT(splitt()));
+            this,SLOT(splitt(QString)));
+    connect(item,SIGNAL(check()),
+            this,SLOT(check_to_close()));
 
 }
 SplitWeb::~SplitWeb(){
     delete this;
 }
-void SplitWeb::splitt(){
+void SplitWeb::check_to_close(){
+    qDebug()<<this->count();
+    if(this->count()==1){
+        hide();
+    }
+}
+void SplitWeb::splitt(QString Url){
     //qDebug()<<url;
     //qDebug()<<this->item->local_url();
     //Item *input2;
@@ -53,7 +61,7 @@ void SplitWeb::splitt(){
      */
     int type = QMetaType::type(input);
     const QMetaObject *metaObj = QMetaType::metaObjectForType(type);
-    QObject *obj = metaObj->newInstance(Q_ARG(QWidget*, nullptr),Q_ARG(QString, this->item->local_url()));
+    QObject *obj = metaObj->newInstance(Q_ARG(QWidget*, nullptr),Q_ARG(QString, Url));
     /*
      * get the construct
      */

@@ -23,11 +23,12 @@ class an_webview : public Item{
 public:
     Q_INVOKABLE explicit an_webview(QWidget *parent = nullptr,QString Url="https://www.google.com");
     static int typeId;
+    ~an_webview();
 
-    QString local_url();
     QString name() const;
 signals:
     QString get_the_url(QString);
+    void check();
 public slots:
     void give_url();
 

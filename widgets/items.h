@@ -11,9 +11,10 @@ class Item : public QWidget
     Q_OBJECT
 public:
     Item(QWidget *parent = 0);
-    virtual QString local_url()=0;
+    //virtual QString local_url()=0;
     virtual QString name() const =0;
 signals:
-    QString get_the_url(QString);
+    virtual QString get_the_url(QString);
+    virtual void check();
 };
 #endif // ITEM_H

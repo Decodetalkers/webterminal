@@ -1,10 +1,12 @@
 #include "mainwindow.h"
 #include "qboxlayout.h"
+#include "qpushbutton.h"
 #include "qwidget.h"
 #include "qwindow.h"
 #include <QLayout>
 #include <QApplication>
 #include <QWindow>
+#include <QVBoxLayout>
 #include <qtermwidget5/qtermwidget.h>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -35,14 +37,33 @@ MainWindow::MainWindow(QWidget *parent)
     //connect(b,SIGNAL(get_the_url(QString)),
     //        this,SLOT(split(QString)));
     //set the pRight to the center
+    QWidget *left = new QWidget();
+    QPushButton *web = new QPushButton("网页");
+    connect(web ,SIGNAL(clicked()),
+            this,SLOT(newweb()));
+    QPushButton *terminal = new QPushButton("终端");
+    connect(terminal ,SIGNAL(clicked()),
+            this,SLOT(newterminal()));
+    QPushButton *app = new QPushButton("应用");
+    QVBoxLayout *buttons = new QVBoxLayout(left);
+    buttons->addWidget(web);
+    buttons->addWidget(terminal);
+    buttons->addWidget(app);
+    left->setFixedWidth(100);
+    pRight->addWidget(left);
     pRight->addWidget(new SplitWeb(this,new console()));
     //QString id = "0x3a00024";
     //WId wid = WId(id.toInt(NULL,16));
     //QWindow *win = QWindow::fromWinId(wid);
     //pRight->addWidget(QWidget::createWindowContainer(win,NULL,Qt::FramelessWindowHint));
-    pRight->addWidget(new SplitWeb(this));
+    //pRight->addWidget(new SplitWeb(this));
     setCentralWidget(pRight);
 }
 MainWindow::~MainWindow(){
 }
-
+void MainWindow::newweb(){
+    pRight->addWidget(new SplitWeb(this));
+}
+void MainWindow::newterminal(){
+    pRight->addWidget(new SplitWeb(this,new console()));
+}

@@ -22,6 +22,7 @@ private:
 
 private slots:
     //if is not say the url, it is baidu.
-    void splitt();
+    void splitt(QString Url);
+    void check_to_close();
 };
 #endif // SPLIT_WEB

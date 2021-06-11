@@ -18,6 +18,9 @@ public:
     ~MainWindow();
 private:
     QSplitter *pRight;
+private slots:
+    void newweb();
+    void newterminal();
 
 };
 #endif // MAINWINDOW_H
