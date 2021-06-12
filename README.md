@@ -1,7 +1,8 @@
 # webterminal
 
 It is for when using terminal , view the web
-Copyright © 2021 webterminal
+
+Copyright © 2021 chen244
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
