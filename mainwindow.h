@@ -24,6 +24,7 @@ private:
     QSplitter *pRight;
     SplitWeb *Console;
     bool status;
+    int icon;
 private slots:
     void newweb();
     void newterminal();
@@ -31,6 +32,7 @@ private slots:
     void setFullscreen();
     void closeEvent(QCloseEvent *event);
     void done();
+    void changeicon();
 
 };
 #endif // MAINWINDOW_H

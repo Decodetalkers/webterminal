@@ -32,6 +32,7 @@ private:
     QWindow *win;
     QLineEdit *url;
     QPoint wpos;
+    int topwindow;
 private slots:
     void close();
     void change_title(QString title);

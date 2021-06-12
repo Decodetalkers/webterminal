@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "qboxlayout.h"
 #include "qevent.h"
+#include "qicon.h"
+#include "qjsonobject.h"
 #include "qobjectdefs.h"
 #include "qwidget.h"
 #include "qwindow.h"
@@ -16,18 +18,26 @@
 #include "widgets/split_web.h"
 #include <QTimer>
 #include <QStyleFactory>
+#include <QJsonObject>
+#include <QJsonDocument>
 using namespace output;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     pRight(new QSplitter(Qt::Horizontal,this)),
-    status(false)
+    status(false),
+    icon(1)
 {
     QTimer *check = new QTimer(this);
     //qDebug()<<QStyleFactory::keys();
     QApplication::setStyle(QStyleFactory::create("Fusion"));
+    setWindowIcon(QIcon(":/icons/yousaki.jpg"));
     check->start(1000/3);
     connect(check,SIGNAL(timeout()),
             this,SLOT(done()));
+    QTimer *check2 = new QTimer(this);
+    check2->start(3000/3);
+    connect(check2,SIGNAL(timeout()),
+            this,SLOT(changeicon()));
    // console = new QTermWidget();
    // QFont font = QApplication::font();
    // font.setFamily("Monospace");
@@ -109,14 +119,38 @@ void MainWindow::newapp(){
     output=shell("xwininfo");
     output=output.simplified();
     int i=output.indexOf("Window id: ")+11;
+    int a=output.indexOf("\" Absolute")-20;
+    int b=output.indexOf("Width: ");
+    int c=output.indexOf(" Height: ");
+    int d=output.indexOf(" Depth: ");
     QString winid = output.mid(i,9);
+   
+    QString winname=output.mid(i+11,a-i+9);
+    QString w=output.mid(b+7,c-b-7);
+    QString h=output.mid(c+9,d-c-9);
+    QString number=QString("%1").arg((int)MainWindow::winId());
+    QString input = "{\"winid\":\""+winid+"\","+
+                    "\"winname\":\""+winname+"\","+
+                    "\"w\":\""+w+"\","+
+                    "\"h\":\""+h+"\","+
+                    "\"mainwindow\":"+number+
+                    +"}";
+    //QJsonDocument jsonDocument = QJsonDocument::fromJson(test.toLocal8Bit());
+    //QJsonObject rootObj = jsonDocument.object();
+    //qDebug()<<rootObj.value("winid").toString();
+    //qDebug()<<rootObj.value("winname").toString();
+    //qDebug()<<rootObj.value("w").toString();
+    //qDebug()<<rootObj.value("h").toString();
+    //qDebug()<<rootObj.value("mainwindow").toInt();
+    
+   
     //qDebug()<<winid.toInt(NULL,16)<<" "<<MainWindow::winId();
     if(winid.toInt(NULL,16)==(int)MainWindow::winId())
     {
         //qDebug()<<"ss";
         return;
     }
-    SplitWeb* temp = new SplitWeb(this,new app(nullptr,output));
+    SplitWeb* temp = new SplitWeb(this,new app(nullptr,input));
     connect(temp,SIGNAL(check()),
             Console,SLOT(check_to_close()));
     Console->addWidget(temp);
@@ -153,4 +187,23 @@ void MainWindow::setFullscreen(){
         showFullScreen();
         status=!status;
     }
+}
+void MainWindow::changeicon(){
+    if(icon==1){
+        setWindowIcon(QIcon(":/icons/yousaki2.jpeg"));
+        icon=2;
+    }else if(icon==2){
+        setWindowIcon(QIcon(":/icons/yousaki3.jpeg"));
+        icon=3;
+    }else if(icon==3){
+        setWindowIcon(QIcon(":/icons/firewalldrogron.jpeg"));
+        icon=4;
+    }else if (icon==4) {
+        setWindowIcon(QIcon(":/icons/youxie.jpeg"));
+        icon=5;
+    }else{
+        setWindowIcon(QIcon(":/icons/liuxingdrogon.jpeg"));
+        icon=1;
+    }
+    //icon = !icon;
 }

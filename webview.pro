@@ -36,6 +36,8 @@ HEADERS += \
     widgets/new_app.h \
     function/function.h
 
+RESOURCES += \
+    res.qrc
 LIBS += -L/usr/include -lqtermwidget5
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

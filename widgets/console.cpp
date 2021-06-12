@@ -31,7 +31,8 @@ console::console(QWidget *parent,QString Url):
     center->setTerminalFont(font);
     center->setScrollBarPosition(QTermWidget::ScrollBarRight);
     center->setColorScheme("BreezeModified");
-    center->changeDir(url->text());    
+    center->changeDir(url->text());
+    center->sendText("export TERM=xterm\n");
     top->addWidget(url);
     top->addWidget(enter);
     top->addWidget(exit);
