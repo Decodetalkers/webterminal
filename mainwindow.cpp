@@ -2,7 +2,6 @@
 #include "qboxlayout.h"
 #include "qevent.h"
 #include "qobjectdefs.h"
-#include "qpushbutton.h"
 #include "qwidget.h"
 #include "qwindow.h"
 #include <QLayout>
@@ -16,12 +15,15 @@
 #include "widgets/console.h"
 #include "widgets/split_web.h"
 #include <QTimer>
+#include <QStyleFactory>
 using namespace output;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     pRight(new QSplitter(Qt::Horizontal,this))
 {
     QTimer *check = new QTimer(this);
+    //qDebug()<<QStyleFactory::keys();
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
     check->start(1000/3);
     connect(check,SIGNAL(timeout()),
             this,SLOT(done()));
@@ -93,6 +95,7 @@ void MainWindow::newterminal(){
             Console,SLOT(check_to_close()));
     Console->addWidget(temp);
     Console->add();
+    //QApplication::setStyle(QStyleFactory::create("Windows"));
 }
 void MainWindow::newapp(){
 
