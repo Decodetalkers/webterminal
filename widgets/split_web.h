@@ -24,11 +24,13 @@ private:
     QSplitter *inner;
     Item *item;
     int index;
+    int index_v;
 
 private slots:
     //if is not say the url, it is baidu.
     void splitt(QString Url);
     void splitt_v(QString Url);
     void check_to_close();
+    void check_to_close_v();
 };
 #endif // SPLIT_WEB

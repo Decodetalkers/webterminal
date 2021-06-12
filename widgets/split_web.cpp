@@ -15,7 +15,8 @@
 //#include <qtermwidget5/qtermwidget.h>
 SplitWeb::SplitWeb(QWidget *parent,Item *item):
     QSplitter(Qt::Horizontal ,parent),
-    index(1)
+    index(1),
+    index_v(1)
     //pRight(new QSplitter(Qt::Horizontal,this))
 {
     //QHBoxLayout *center = new QHBoxLayout(scene);
@@ -34,6 +35,9 @@ SplitWeb::SplitWeb(QWidget *parent,Item *item):
 
     connect(item,SIGNAL(check()),
             this,SLOT(check_to_close()));
+    connect(item,SIGNAL(check()),
+            this,SLOT(check_to_close_v()));
+    //qDebug()<<index;
 
 }
 SplitWeb::~SplitWeb(){
@@ -49,25 +53,55 @@ SplitWeb::~SplitWeb(){
 void SplitWeb::check_to_close(){
     index=index-1;
     //qDebug()<<"index = "<<index;
+    //qDebug()<<"index_v = "<<index_v;
     if(index==0){
+        //qDebug()<<"sfdsf";
         emit check();
         QWidget *w;
+        //emit check();
+        //if(inner->count()>0){
+        //    w = inner->widget(0);
+        //    w->setParent(nullptr);
+        //    w->deleteLater();
+        //}
+
         while (this->count() >0) {
             //qDebug()<<this->count();
             w = widget(0);
             w->setParent(nullptr);
             w->deleteLater();
         }
-        //while (inner->count() >1){
+    }
+    //widget(count()-1)->hide();
+
+}
+/*
+ * here should not emit signals, or it will be minus
+ */
+void SplitWeb::check_to_close_v(){
+    index_v=index_v-1;
+    //qDebug()<<"index_v = "<<index_v;
+    if(index_v==0){
+        //qDebug()<<"ssss";
+        //emit check();
+        QWidget *w;
+        //emit check();
+        //if(inner->count()>0){
         //    w = inner->widget(0);
         //    w->setParent(nullptr);
         //    w->deleteLater();
         //}
-        //inner->deleteLater();
+
+        while (inner->count() >0) {
+            //qDebug()<<this->count();
+            w = inner->widget(0);
+            w->setParent(nullptr);
+            w->deleteLater();
+        }
     }
+    //widget(count()-1)->hide();
 
 }
-
 void SplitWeb::splitt(QString Url){
     //qDebug()<<url;
     //qDebug()<<this->item->local_url();
@@ -134,9 +168,13 @@ void SplitWeb::splitt_v(QString Url){
      */
     Item *input2 = qobject_cast<Item*>(obj);
     index+=1;
+    index_v+=1;
+    qDebug()<<index;
     SplitWeb *temp = new SplitWeb(this,input2);
     connect(temp,SIGNAL(check()),
             this,SLOT(check_to_close()));
+    connect(temp,SIGNAL(check()),
+            this,SLOT(check_to_close_v()));
     inner->insertWidget(0, temp);
     //connect(temp->a->outside ,SIGNAL(clicked()),
     //        temp->a,SLOT(give_url()));
