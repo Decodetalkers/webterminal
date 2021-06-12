@@ -23,10 +23,12 @@ signals:
 private:
     QSplitter *pRight;
     SplitWeb *Console;
+    bool status;
 private slots:
     void newweb();
     void newterminal();
     void newapp();
+    void setFullscreen();
     void closeEvent(QCloseEvent *event);
     void done();
 

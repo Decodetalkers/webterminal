@@ -9,6 +9,7 @@ console::console(QWidget *parent,QString Url):
     Item(parent),
     web(new QVBoxLayout(this)),
     status(true)
+    //isfull(false)
 {
     url=new QLineEdit();
     url->setText(Url);
@@ -104,6 +105,19 @@ void console::hide_title(QKeyEvent *key){
                 exit->show();
                 status=!status;
             }
+            break;
+        //case Qt::Key_F11:
+        //    if(!isfull){
+        //        setWindowFlag(Qt::Window);
+        //        showFullScreen();
+        //        isfull=!isfull;
+        //    }else{
+        //        setWindowFlag(Qt::CoverWindow);
+        //        showNormal();
+        //        //setWindowFlag(Qt::SubWindow);
+        //        isfull=!isfull;
+        //    }
+        //    break;
         default:
             break;
     };

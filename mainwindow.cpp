@@ -19,7 +19,8 @@
 using namespace output;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-    pRight(new QSplitter(Qt::Horizontal,this))
+    pRight(new QSplitter(Qt::Horizontal,this)),
+    status(false)
 {
     QTimer *check = new QTimer(this);
     //qDebug()<<QStyleFactory::keys();
@@ -62,10 +63,14 @@ MainWindow::MainWindow(QWidget *parent)
     QPushButton *app = new QPushButton("应用");
     connect(app ,SIGNAL(clicked()),
             this,SLOT(newapp()));
+    QPushButton *fullscreen = new QPushButton("全屏");
+    connect(fullscreen ,SIGNAL(clicked()),
+            this,SLOT(setFullscreen()));
     QVBoxLayout *buttons = new QVBoxLayout(left);
     buttons->addWidget(web);
     buttons->addWidget(terminal);
     buttons->addWidget(app);
+    buttons->addWidget(fullscreen);
     left->setFixedWidth(100);
     pRight->addWidget(left);
     Console = new SplitWeb(this,new console());
@@ -103,6 +108,14 @@ void MainWindow::newapp(){
     QString output;
     output=shell("xwininfo");
     output=output.simplified();
+    int i=output.indexOf("Window id: ")+11;
+    QString winid = output.mid(i,9);
+    //qDebug()<<winid.toInt(NULL,16)<<" "<<MainWindow::winId();
+    if(winid.toInt(NULL,16)==(int)MainWindow::winId())
+    {
+        //qDebug()<<"ss";
+        return;
+    }
     SplitWeb* temp = new SplitWeb(this,new app(nullptr,output));
     connect(temp,SIGNAL(check()),
             Console,SLOT(check_to_close()));
@@ -130,5 +143,14 @@ void MainWindow::closeEvent(QCloseEvent* event){
 void MainWindow::done(){
     if(pRight->count()==1){
         exit(0);
+    }
+}
+void MainWindow::setFullscreen(){
+    if(status){
+        showNormal();
+        status=!status;
+    } else {
+        showFullScreen();
+        status=!status;
     }
 }

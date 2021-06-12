@@ -38,6 +38,7 @@ private:
     QLineEdit *url;
     //bool eventFilter(QObject *object,QEvent *event);
     bool status;
+    //bool isfull;
 
 private slots:
     void hide_title(QKeyEvent *key);
