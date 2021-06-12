@@ -28,13 +28,16 @@ public:
     QString name() const;
 signals:
     QString get_the_url(QString);
+    QString get_the_url_v(QString);
     void check();
 public slots:
     void give_url();
+    void give_url_v();
 
 
 private:
     QPushButton *outside;
+    QPushButton *outside_v;
     QVBoxLayout *web;
     QPushButton *enter;
     QPushButton *exit;

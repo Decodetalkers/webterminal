@@ -13,16 +13,22 @@ class SplitWeb : public QSplitter
 public:
     SplitWeb(QWidget *parent = nullptr, Item *item=new an_webview());
     virtual ~SplitWeb();
-
+    void add();
+signals:
+    void check();
+    void check_v();
 private:
     //an_webview *a;
     //QSplitter *pRight;
     //QTermWidget *console;
+    QSplitter *inner;
     Item *item;
+    int index;
 
 private slots:
     //if is not say the url, it is baidu.
     void splitt(QString Url);
+    void splitt_v(QString Url);
     void check_to_close();
 };
 #endif // SPLIT_WEB

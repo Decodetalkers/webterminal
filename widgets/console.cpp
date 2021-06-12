@@ -1,5 +1,6 @@
 #include "console.h"
 #include <QApplication>
+#include <QDebug>
 int console::typeId = qRegisterMetaType<console*>();
 console::console(QWidget *parent,QString Url):  Item(parent),
     web(new QVBoxLayout(this))
@@ -13,6 +14,8 @@ console::console(QWidget *parent,QString Url):  Item(parent),
     exit->setText("关闭");
     outside = new QPushButton();
     outside->setText("分屏");
+    outside_v = new QPushButton();
+    outside_v->setText("分屏V");
     top=new QHBoxLayout();
     center = new QTermWidget();
     QFont font = QApplication::font();
@@ -27,6 +30,7 @@ console::console(QWidget *parent,QString Url):  Item(parent),
     top->addWidget(enter);
     top->addWidget(exit);
     top->addWidget(outside);
+    top->addWidget(outside_v);
     web->addLayout(top);
     web->addWidget(center);
     connect(this->enter,SIGNAL(clicked()),
@@ -37,6 +41,8 @@ console::console(QWidget *parent,QString Url):  Item(parent),
             this,SLOT(change_the_title()));
     connect(this->outside,SIGNAL(clicked()),
             this,SLOT(give_url()));
+    connect(this->outside_v,SIGNAL(clicked()),
+            this,SLOT(give_url_v()));
     connect(this->center,SIGNAL(finished()),
             this,SLOT(close()));
     //When the terminal break, delete the class
@@ -52,6 +58,10 @@ void console::give_url(){
     emit get_the_url(url->text());
     //connect to the solt
 }
+void console::give_url_v(){
+    emit get_the_url_v(url->text());
+    //connect to the solt
+}
 void console::change_the_location(){
     center->changeDir(url->text());
 }
@@ -64,5 +74,6 @@ QString console::name() const{
     return "console*";
 }
 console::~console(){
+    qDebug()<<"close";
     emit check();
 }

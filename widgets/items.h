@@ -14,7 +14,8 @@ public:
     //virtual QString local_url()=0;
     virtual QString name() const =0;
 signals:
-    virtual QString get_the_url(QString);
-    virtual void check();
+    QString get_the_url(QString);
+    QString get_the_url_v(QString);
+    void check();
 };
 #endif // ITEM_H

@@ -15,7 +15,9 @@ SOURCES += \
     widgets/my_webengine.cpp \
     widgets/split_web.cpp \
     widgets/item.cpp \
-    widgets/console.cpp
+    widgets/console.cpp \
+    widgets/new_app.cpp \
+    function/function.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -23,7 +25,9 @@ HEADERS += \
     widgets/my_webengine.h \
     widgets/split_web.h \
     widgets/items.h \
-    widgets/console.h
+    widgets/console.h \
+    widgets/new_app.h \
+    function/function.h
 
 LIBS += -L/usr/include -lqtermwidget5
 # Default rules for deployment.

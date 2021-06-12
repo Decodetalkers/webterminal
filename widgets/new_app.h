@@ -1,22 +1,20 @@
-#ifndef CONSOLE_H
-#define CONSOLE_H
+#ifndef NEW_APP_H
+#define NEW_APP_H
 #include "items.h"
 #include "qobjectdefs.h"
+#include <QWindow>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QLineEdit>
-#include <QDir>
-#include "qwidget.h"
-#include <qtermwidget5/qtermwidget.h>
-class console : public Item{
+
+class app : public Item{
     Q_OBJECT
 public:
-    Q_INVOKABLE console(QWidget *parent = nullptr,QString Url=QDir::currentPath());
+    Q_INVOKABLE app(QWidget *parent = nullptr,QString Url="0x1234");
     static int typeId;
-    //QString local_url();
     QString name() const;
-    ~console();
+    ~app();
 signals:
     QString get_the_url(QString);
     QString get_the_url_v(QString);
@@ -24,20 +22,19 @@ signals:
 public slots:
     void give_url();
     void give_url_v();
-
 private:
     QPushButton *outside;
     QPushButton *outside_v;
     QVBoxLayout *web;
-    QPushButton *enter;
     QPushButton *exit;
     QHBoxLayout *top;
-    QTermWidget *center;
-
+    QWidget *center;
+    QWindow *win;
     QLineEdit *url;
+    QPoint wpos;
 private slots:
     void close();
-    void change_the_location();
-    void change_the_title();
+    void change_title(QString title);
 };
-#endif // CONSOLE_H
+
+#endif // NEW_APP_H

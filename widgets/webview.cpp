@@ -19,6 +19,8 @@ an_webview::an_webview(QWidget *parent,QString Url):
     exit->setText("关闭");
     outside = new QPushButton();
     outside->setText("分屏");
+    outside_v = new QPushButton();
+    outside_v->setText("分屏V");
     top=new QHBoxLayout();
     center = new my_webengine();
     center->setUrl(QUrl(Url));
@@ -26,6 +28,7 @@ an_webview::an_webview(QWidget *parent,QString Url):
     top->addWidget(enter);
     top->addWidget(exit);
     top->addWidget(outside);
+    top->addWidget(outside_v);
     web->addLayout(top);
     web->addWidget(center);
     connect(this->enter,SIGNAL(clicked()),
@@ -36,6 +39,8 @@ an_webview::an_webview(QWidget *parent,QString Url):
             this,SLOT(newurl(QUrl)));
     connect(this->outside,SIGNAL(clicked()),
             this,SLOT(give_url()));
+    connect(this->outside_v,SIGNAL(clicked()),
+            this,SLOT(give_url_v()));
 }
 
 void an_webview::connect_to_internet(){
@@ -50,6 +55,10 @@ void an_webview::close(){
  */
 void an_webview::give_url(){
     emit get_the_url(url->text());
+    //connect to the solt
+}
+void an_webview::give_url_v(){
+    emit get_the_url_v(url->text());
     //connect to the solt
 }
 //QString an_webview::local_url(){
@@ -67,5 +76,6 @@ QString an_webview::name() const{
     return "an_webview*";
 }
 an_webview::~an_webview(){
+    qDebug()<<"it is delete";
     emit check();
 }
