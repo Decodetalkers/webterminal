@@ -1,5 +1,12 @@
 QT       += core gui
 
+CONFIG+=debug_and_release
+CONFIG(debug, debug|release){
+    TARGET = webview
+} else {
+    TARGET =webview
+}
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets webenginewidgets
 
 CONFIG += c++11

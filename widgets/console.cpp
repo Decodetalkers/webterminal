@@ -1,9 +1,14 @@
 #include "console.h"
+#include "qcoreevent.h"
+#include "qevent.h"
+#include "qnamespace.h"
 #include <QApplication>
 #include <QDebug>
 int console::typeId = qRegisterMetaType<console*>();
-console::console(QWidget *parent,QString Url):  Item(parent),
-    web(new QVBoxLayout(this))
+console::console(QWidget *parent,QString Url):  
+    Item(parent),
+    web(new QVBoxLayout(this)),
+    status(true)
 {
     url=new QLineEdit();
     url->setText(Url);
@@ -25,7 +30,7 @@ console::console(QWidget *parent,QString Url):  Item(parent),
     center->setTerminalFont(font);
     center->setScrollBarPosition(QTermWidget::ScrollBarRight);
     center->setColorScheme("BreezeModified");
-    center->changeDir(url->text());
+    center->changeDir(url->text());    
     top->addWidget(url);
     top->addWidget(enter);
     top->addWidget(exit);
@@ -45,6 +50,9 @@ console::console(QWidget *parent,QString Url):  Item(parent),
             this,SLOT(give_url_v()));
     connect(this->center,SIGNAL(finished()),
             this,SLOT(close()));
+    connect(this->center,SIGNAL(termKeyPressed(QKeyEvent *)),
+            this,SLOT(hide_title(QKeyEvent *)));
+    // It is the solt of qtermwidget, you can get it through the header.
     //When the terminal break, delete the class
 }
 void console::close(){
@@ -74,6 +82,30 @@ QString console::name() const{
     return "console*";
 }
 console::~console(){
-    qDebug()<<"close";
+    //qDebug()<<"close";
     emit check();
+}
+
+void console::hide_title(QKeyEvent *key){
+    switch(key->key()){
+        case Qt::Key_F2:
+            if(status){
+                url->hide();
+                enter->hide();
+                exit->hide();
+                outside->hide();
+                outside_v->hide();
+                status=!status;
+            } else {
+                url->show();
+                enter->show();
+                outside->show();
+                outside_v->show();
+                exit->show();
+                status=!status;
+            }
+        default:
+            break;
+    };
+
 }

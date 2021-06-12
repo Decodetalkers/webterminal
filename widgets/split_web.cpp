@@ -40,7 +40,7 @@ SplitWeb::~SplitWeb(){
     //inner->deleteLater();
     QWidget *w;
     while (this->count() > 0) {
-        qDebug()<<this->count();
+        //qDebug()<<this->count();
         w = widget(0);
         w->setParent(nullptr);
         w->deleteLater();
@@ -48,21 +48,21 @@ SplitWeb::~SplitWeb(){
 }
 void SplitWeb::check_to_close(){
     index=index-1;
-    qDebug()<<"index = "<<index;
+    //qDebug()<<"index = "<<index;
     if(index==0){
         emit check();
         QWidget *w;
         while (this->count() >0) {
-            qDebug()<<this->count();
+            //qDebug()<<this->count();
             w = widget(0);
             w->setParent(nullptr);
             w->deleteLater();
         }
-        while (inner->count() >1){
-            w = inner->widget(0);
-            w->setParent(nullptr);
-            w->deleteLater();
-        }
+        //while (inner->count() >1){
+        //    w = inner->widget(0);
+        //    w->setParent(nullptr);
+        //    w->deleteLater();
+        //}
         //inner->deleteLater();
     }
 

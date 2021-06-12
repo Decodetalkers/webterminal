@@ -1,0 +1,6 @@
+debug
+release
+Makefile*
+compile_commands.json
+webview
+*.pro.user

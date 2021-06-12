@@ -1,6 +1,7 @@
 #ifndef CONSOLE_H
 #define CONSOLE_H
 #include "items.h"
+#include "qevent.h"
 #include "qobjectdefs.h"
 #include <QPushButton>
 #include <QHBoxLayout>
@@ -35,7 +36,11 @@ private:
     QTermWidget *center;
 
     QLineEdit *url;
+    //bool eventFilter(QObject *object,QEvent *event);
+    bool status;
+
 private slots:
+    void hide_title(QKeyEvent *key);
     void close();
     void change_the_location();
     void change_the_title();
