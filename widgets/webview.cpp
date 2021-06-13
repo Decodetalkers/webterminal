@@ -76,6 +76,6 @@ QString an_webview::name() const{
     return "an_webview*";
 }
 an_webview::~an_webview(){
-    qDebug()<<"it is delete";
+    //qDebug()<<"it is delete";
     emit check();
 }
