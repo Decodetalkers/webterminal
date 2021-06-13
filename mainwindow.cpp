@@ -30,12 +30,18 @@ MainWindow::MainWindow(QWidget *parent)
     QTimer *check = new QTimer(this);
     //qDebug()<<QStyleFactory::keys();
     QApplication::setStyle(QStyleFactory::create("Fusion"));
-    setWindowIcon(QIcon(":/icons/yousaki.jpg"));
+
     check->start(1000/3);
     connect(check,SIGNAL(timeout()),
             this,SLOT(done()));
     QTimer *check2 = new QTimer(this);
+#ifdef QT_NO_DEBUG
     check2->start(3000/3);
+    setWindowIcon(QIcon(":/icons/yousaki.jpg"));
+#else
+    check2->start(1000/3);
+    setWindowIcon(QIcon(":/icons/1.png"));
+#endif
     connect(check2,SIGNAL(timeout()),
             this,SLOT(changeicon()));
    // console = new QTermWidget();
@@ -189,6 +195,7 @@ void MainWindow::setFullscreen(){
     }
 }
 void MainWindow::changeicon(){
+#ifdef QT_NO_DEBUG
     if(icon==1){
         setWindowIcon(QIcon(":/icons/yousaki2.jpeg"));
         icon=2;
@@ -206,4 +213,13 @@ void MainWindow::changeicon(){
         icon=1;
     }
     //icon = !icon;
+#else
+    QString number=QString("%1").arg(icon);
+    QString frame = ":/icons/"+number+".png";
+    setWindowIcon(QIcon(frame));
+    if(icon<35)
+        icon+=1;
+    else
+        icon=1;
+#endif
 }

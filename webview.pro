@@ -2,9 +2,14 @@ QT       += core gui
 
 CONFIG+=debug_and_release
 CONFIG(debug, debug|release){
-    TARGET = webview
+    TARGET = webview3
+    DEFINES +=DEBUG
+    RESOURCES += \
+        res2.qrc
 } else {
     TARGET =webview
+    RESOURCES += \
+        res.qrc
 }
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets webenginewidgets
@@ -36,8 +41,7 @@ HEADERS += \
     widgets/new_app.h \
     function/function.h
 
-RESOURCES += \
-    res.qrc
+
 LIBS += -L/usr/include -lqtermwidget5
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

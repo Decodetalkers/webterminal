@@ -1,0 +1,39 @@
+<RCC>
+    <qresource prefix="/icons">
+<file alias="9.png">./output/9.png</file>
+<file alias="8.png">./output/8.png</file>
+<file alias="7.png">./output/7.png</file>
+<file alias="6.png">./output/6.png</file>
+<file alias="5.png">./output/5.png</file>
+<file alias="4.png">./output/4.png</file>
+<file alias="3.png">./output/3.png</file>
+<file alias="35.png">./output/35.png</file>
+<file alias="34.png">./output/34.png</file>
+<file alias="33.png">./output/33.png</file>
+<file alias="32.png">./output/32.png</file>
+<file alias="31.png">./output/31.png</file>
+<file alias="30.png">./output/30.png</file>
+<file alias="2.png">./output/2.png</file>
+<file alias="29.png">./output/29.png</file>
+<file alias="28.png">./output/28.png</file>
+<file alias="27.png">./output/27.png</file>
+<file alias="26.png">./output/26.png</file>
+<file alias="25.png">./output/25.png</file>
+<file alias="24.png">./output/24.png</file>
+<file alias="23.png">./output/23.png</file>
+<file alias="22.png">./output/22.png</file>
+<file alias="21.png">./output/21.png</file>
+<file alias="20.png">./output/20.png</file>
+<file alias="1.png">./output/1.png</file>
+<file alias="19.png">./output/19.png</file>
+<file alias="18.png">./output/18.png</file>
+<file alias="17.png">./output/17.png</file>
+<file alias="16.png">./output/16.png</file>
+<file alias="15.png">./output/15.png</file>
+<file alias="14.png">./output/14.png</file>
+<file alias="13.png">./output/13.png</file>
+<file alias="12.png">./output/12.png</file>
+<file alias="11.png">./output/11.png</file>
+<file alias="10.png">./output/10.png</file>
+    </qresource>
+</RCC>
