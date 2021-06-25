@@ -29,7 +29,8 @@ SOURCES += \
     widgets/item.cpp \
     widgets/console.cpp \
     widgets/new_app.cpp \
-    function/function.cpp
+    function/function.cpp \
+    function/message.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -43,6 +44,8 @@ HEADERS += \
 
 
 LIBS += -L/usr/include -lqtermwidget5
+CONFIG      += link_pkgconfig
+PKGCONFIG   += libnotify
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
