@@ -179,6 +179,7 @@ void MainWindow::closeEvent(QCloseEvent* event){
         }
     };
     f(event,Console,this);
+    Message();
 }
 void MainWindow::done(){
     if(pRight->count()==1){
